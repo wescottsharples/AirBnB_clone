@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """This module contains the BaseModel class."""
-
-
 import uuid
 import datetime
 from models.__init__ import storage
+
 
 class BaseModel:
     """
@@ -19,9 +18,15 @@ class BaseModel:
         if kwargs is not None:
             for key, value in kwargs.items():
                 if key == 'created_at':
-                    self.created_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.created_at = datetime.strptime(
+                        value,
+                        '%Y-%m-%dT%H:%M:%S.%f'
+                    )
                 elif key == 'updated_at':
-                    self.updated_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.updated_at = datetime.strptime(
+                        value,
+                        '%Y-%m-%dT%H:%M:%S.%f'
+                    )
                 else:
                     self.key = value
         if len(kwargs) == 0:
@@ -29,7 +34,10 @@ class BaseModel:
 
     def __str__(self):
         """returns a string with a description of the object"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__,
+            self.id, self.__dict__
+        )
 
     def save(self):
         """
