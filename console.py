@@ -4,18 +4,36 @@ import cmd
 import sys
 
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
-    """the hbnb console"""
+    """The HBNB console
+
+    Attributes:
+        prompt      The prompt to be displayed
+        __classes   List of accepted classes
+    """
     prompt = "(hbnb) "
-    classes = ["BaseModel"]
+    __classes = ["BaseModel",
+                 "User",
+                 "State",
+                 "City",
+                 "Amenity",
+                 "Place",
+                 "Review"]
 
     def do_create(self, arg):
-        """Creates a new BaseModel instance"""
+        """Creates a new instance of specified class"""
         if len(arg) == 0:
             print("** class name missing **")
-        elif arg not in self.classes:
+        elif arg not in self.__classes:
             print("** class doesn't exist **")
         else:
             new = eval("{}()".format(arg))
@@ -24,10 +42,11 @@ class HBNBCommand(cmd.Cmd):
             print(new.id)
 
     def do_show(self, arg):
+        """Shows attrs of specified instance"""
         args = self.parse(arg)
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in self.classes:
+        elif args[0] not in self.__classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -40,10 +59,11 @@ class HBNBCommand(cmd.Cmd):
                 print(obj)
 
     def do_destroy(self, arg):
+        """Destroys specified instance"""
         args = self.parse(arg)
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in self.classes:
+        elif args[0] not in self.__classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -56,12 +76,13 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
+        """Shows attrs of all instances"""
         obj_list = []
         if len(arg) == 0:
             for value in storage.all().values():
                 obj_list.append(value.__str__())
             print(obj_list)
-        elif arg not in self.classes:
+        elif arg not in self.__classes:
             print("** class doesn't exist **")
         else:
             for key, value in storage.all().items():
@@ -70,10 +91,11 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
 
     def do_update(self, arg):
+        """Update or add attr to specified instance"""
         args = self.parse(arg)
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in self.classes:
+        elif args[0] not in self.__classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
