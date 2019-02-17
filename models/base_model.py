@@ -24,6 +24,8 @@ class BaseModel:
                     self.updated_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 else:
                     self.key = value
+        if len(kwargs) == 0:
+            storage.new(self)
 
     def __str__(self):
         """returns a string with a description of the object"""
@@ -34,6 +36,7 @@ class BaseModel:
         updates the public instance attribute updated_at with current datetime
         """
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
