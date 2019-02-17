@@ -69,6 +69,27 @@ class HBNBCommand(cmd.Cmd):
                     obj_list.append(storage.all()[key].__str__())
             print(obj_list)
 
+    def do_update(self, arg):
+        args = self.parse(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        elif ("{}.{}".format(args[0], args[1])) not in storage.all().keys():
+            print("** no instance found **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            arg_type = type(eval(args[3]))
+            attr = args[3].strip('\'\"')
+            setattr(storage.all()[key], args[2], arg_type(attr))
+            storage.all()[key].save()
+
     def emptyline(self):
         """Prevents program from executing last entered cmd"""
         pass
