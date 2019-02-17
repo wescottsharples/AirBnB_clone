@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This module is for the storage engine."""
+import json
 
 
 class FileStorage:
@@ -17,13 +18,16 @@ class FileStorage:
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
         k = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[k] = obj.to_dict()
+        self.__objects[k] = obj
 
     def save(self):
         """serializes __objects to the JSON file"""
-        json_dict = json.dumps(self.__objects)
-        with open(self.__file_path, 'w+', encoding='utf=8') as f:
-            f.write(json_dict)
+        dict_dict = {}
+        with open(self.__file_path, 'w') as f:
+            for obj in self.__objects.values():
+                k = "{}.{}".format(obj.__class__.__name__, obj.id)
+                dict_dict[k] = obj.to_dict()
+            json.dump(dict_dict, f)
 
     def reload(self):
         """
@@ -32,7 +36,10 @@ class FileStorage:
         """
         try:
             with open(self.__file_path) as f:
-                json_dict = f.read()
-            dict_dict = json.loads(json_dict)
+                dict_dict = json.load(f)
             for key, value in dict_dict.items():
-                self.__objects[key] = value
+                if '__class__' in value.keys():
+                    class_name = value['__class__']
+                    eval("{}({})".format(class_name, **value))
+        except FileNotFoundError:
+            pass
