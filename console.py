@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module is the hbnb console."""
 import cmd
+from shlex import split
 import sys
 
 from models.base_model import BaseModel
@@ -126,8 +127,19 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def parse(self, arg):
-        """Converts line to tuple of arguments"""
+        """Converts arg to tuple of arguments"""
         return tuple(arg.split())
+
+    def default(self, arg):
+        args = arg.split('.')
+        carg = args[0]
+        args = args[1].split('(')
+        cmand = args[0]
+        if cmand == "all":
+            self.do_all(carg)
+        elif cmand == "count":
+            self.do_count(arg)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
