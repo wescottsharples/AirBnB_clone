@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """This module contains the BaseModel class."""
-
-
 import uuid
-import datetime
+from datetime import datetime
 from models.__init__ import storage
+
 
 class BaseModel:
     """
@@ -14,28 +13,31 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """instantiates an instance of class BaseModel"""
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
-        if kwargs is not None:
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        if len(kwargs) > 0:
             for key, value in kwargs.items():
                 if key == 'created_at':
-                    self.created_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.created_at = datetime.strptime(
+                            value, '%Y-%m-%dT%H:%M:%S.%f')
                 elif key == 'updated_at':
-                    self.updated_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.updated_at = datetime.strptime(
+                            value, '%Y-%m-%dT%H:%M:%S.%f')
                 else:
                     self.key = value
-        if len(kwargs) == 0:
+        else:
             storage.new(self)
 
     def __str__(self):
         """returns a string with a description of the object"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+                self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
         updates the public instance attribute updated_at with current datetime
         """
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
