@@ -3,6 +3,7 @@
 import datetime
 import os
 import unittest
+from models.base_model import BaseModel
 from models.user import User
 
 
@@ -34,6 +35,7 @@ class TestClassUser(unittest.TestCase):
         """tests creating a new instance of User class"""
         testu = User()
         self.assertTrue(type(testu) is User)
+        self.assertTrue(isinstance(testu, BaseModel))
         self.assertTrue(type(testu.id) is str)
         self.assertTrue(type(testu.created_at) is datetime.datetime)
         self.assertTrue(type(testu.updated_at) is datetime.datetime)
