@@ -84,6 +84,9 @@ class TestClassReview(unittest.TestCase):
         self.assertEqual(type(new_obj), type(recreate_obj))
         self.assertEqual(new_obj.id, recreate_obj.id)
         self.assertEqual(len(obj_dict), len(r_obj_dict))
+        self.assertEqual(new_obj.place_id, recreate_obj.place_id)
+        self.assertEqual(new_obj.user_id, recreate_obj.user_id)
+        self.assertEqual(new_obj.text, recreate_obj.text)
 
 if __name__ == '__main__':
     unittest.main()
