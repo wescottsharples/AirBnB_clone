@@ -24,7 +24,7 @@ class BaseModel:
                     self.updated_at = datetime.strptime(
                             value, '%Y-%m-%dT%H:%M:%S.%f')
                 else:
-                    self.key = value
+                    setattr(self, key, value)
         else:
             storage.new(self)
 
