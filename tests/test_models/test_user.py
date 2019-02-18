@@ -41,7 +41,7 @@ class TestClassUser(unittest.TestCase):
     def test_save(self):
         """tests the save method in User class"""
         testu = User()
-        update_t = testb.updated_at.isoformat(sep='T')
+        update_t = testu.updated_at.isoformat(sep='T')
         testu.save()
         saved_update_t = testu.updated_at.isoformat(sep='T')
         self.assertTrue(update_t != saved_update_t)
