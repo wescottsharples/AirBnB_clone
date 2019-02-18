@@ -3,6 +3,7 @@
 import datetime
 import os
 import unittest
+from models.base_model import BaseModel
 from models.review import Review
 
 
@@ -34,6 +35,7 @@ class TestClassReview(unittest.TestCase):
         """tests creating a new instance of Review"""
         testr = Review()
         self.assertTrue(type(testr) is Review)
+        self.assertTrue(isinstance(testr, BaseModel))
         self.assertTrue(type(testr.id) is str)
         self.assertTrue(type(testr.created_at) is datetime.datetime)
         self.assertTrue(type(testr.updated_at) is datetime.datetime)
