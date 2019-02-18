@@ -90,6 +90,17 @@ class HBNBCommand(cmd.Cmd):
                     obj_list.append(storage.all()[key].__str__())
             print(obj_list)
 
+    def do_count(self, arg):
+        """Shows count of all instances specified"""
+        if arg not in self.__classes:
+            print("** class doesn't exist **")
+        else:
+            count = 0
+            for key in storage.all().keys():
+                if arg in key:
+                    count += 1
+            print(count)
+
     def do_update(self, arg):
         """Update or add attr to specified instance"""
         args = self.parse(arg)
