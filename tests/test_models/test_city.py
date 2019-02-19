@@ -41,12 +41,6 @@ class TestClasscity(unittest.TestCase):
         for method in dir(city):
             self.assertTrue(len(method.__doc__) > 0)
 
-    def test_attributes(self):
-        city = City()
-        city_d = city.to_dict()
-        self.assertTrue("name" in city_d)
-        self.assertTrue("state_id" in city_d)
-
     def test_attribute_types(self):
         city = City()
         self.assertEqual(type(city.name), str)
