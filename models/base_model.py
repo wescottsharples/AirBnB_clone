@@ -57,4 +57,5 @@ class BaseModel:
             dictionary[key] = value
         dictionary['created_at'] = self.created_at.isoformat(sep='T')
         dictionary['updated_at'] = self.updated_at.isoformat(sep='T')
+        dictionary['__class__'] = self.__class__.__name__
         return dictionary
