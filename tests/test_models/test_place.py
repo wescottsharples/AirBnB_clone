@@ -41,21 +41,6 @@ class TestClassplace(unittest.TestCase):
         for method in dir(place):
             self.assertTrue(len(method.__doc__) > 0)
 
-    def test_attributes(self):
-        place = Place()
-        place_d = place.to_dict()
-        self.assertTrue("name" in pace_d)
-        self.assertTrue("city_id" in pace_d)
-        self.assertTrue("user_id" in pace_d)
-        self.assertTrue("description" in pace_d)
-        self.assertTrue("number_rooms" in pace_d)
-        self.assertTrue("number_bathrooms" in pace_d)
-        self.assertTrue("max_guest" in pace_d)
-        self.assertTrue("price_by_night" in pace_d)
-        self.assertTrue("longitude" in pace_d)
-        self.assertTrue("latitude" in pace_d)
-        self.assertTrue("amenity_ids" in pace_d)
-
     def test_attribute_types(self):
         place = Place()
         self.assertEqual(type(place.name), str)
