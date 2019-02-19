@@ -41,11 +41,6 @@ class TestClassamenity(unittest.TestCase):
         for method in dir(amenity):
             self.assertTrue(len(method.__doc__) > 0)
 
-    def test_attributes(self):
-        amenity = Amenity()
-        amenity_d = amenity.to_dict()
-        self.assertTrue("name" in amenity_d.keys())
-
     def test_attribute_types(self):
         amenity = Amenity()
         self.assertEqual(type(amenity.name), str)
