@@ -2,6 +2,7 @@
 """Unittests for place"""
 import datetime
 import os
+from pep8 import StyleGuide
 import unittest
 from models.base_model import BaseModel
 from models.place import Place
@@ -30,6 +31,11 @@ class TestClassplace(unittest.TestCase):
             os.remove("temp.json")
         elif os.path.isfile('./file.json') is True:
             os.remove("file.json")
+
+    def test_style(self):
+        """tests for correct pep8 style"""
+        style = StyleGuide(quiet=True).check_files(["models/place.py"])
+        self.assertEqual(style.total_errors, 0, "fix pep8")
 
     def test_subclass(self):
         """tests if subclass of BaseModel"""
