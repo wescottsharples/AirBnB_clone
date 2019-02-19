@@ -32,6 +32,7 @@ class TestClassUser(unittest.TestCase):
             os.remove("file.json")
 
     def test_docstrings(self):
+        """tests if docstrings exist"""
         user = User()
         self.assertTrue(issubclass(user.__class__, BaseModel), True)
         self.assertTrue(len(User.__doc__) > 0)
