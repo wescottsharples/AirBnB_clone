@@ -2,6 +2,7 @@
 """Unittests for State"""
 import datetime
 import os
+from pep8 import StyleGuide
 import unittest
 from models.base_model import BaseModel
 from models.state import State
@@ -23,13 +24,18 @@ class TestClassState(unittest.TestCase):
         remove temp file
         """
         if os.path.isfile('./temp.json') is True:
-            with open ('temp.json') as r:
+            with open('temp.json') as r:
                 instances = r.read()
             with open('file.json', 'w') as w:
                 w.write(instances)
             os.remove('temp.json')
         elif os.path.isfile('./file.json') is True:
             os.remove('file.json')
+
+    def test_style(self):
+        """tests for correct pep8 style"""
+        style = StyleGuide(quiet=True).check_files(["models/state.py"])
+        self.assertEqual(style.total_errors, 0, "fix pep8")
 
     def test_new_instance(self):
         """tests creating a new instance of BaseModel class"""
