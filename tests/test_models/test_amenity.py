@@ -32,16 +32,19 @@ class TestClassamenity(unittest.TestCase):
             os.remove("file.json")
 
     def test_subclass(self):
+        """test if subclass of BaseModel"""
         amenity = Amenity()
         self.assertTrue(issubclass(amenity.__class__, BaseModel))
 
     def test_docstrings(self):
+        """test if docstrings exist"""
         amenity = Amenity()
         self.assertTrue(len(amenity.__doc__) > 0)
         for method in dir(amenity):
             self.assertTrue(len(method.__doc__) > 0)
 
     def test_attribute_types(self):
+        """test if amenity attrs are correct type"""
         amenity = Amenity()
         self.assertEqual(type(amenity.name), str)
 
