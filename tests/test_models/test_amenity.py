@@ -44,7 +44,7 @@ class TestClassamenity(unittest.TestCase):
     def test_attributes(self):
         amenity = Amenity()
         amenity_d = amenity.to_dict()
-        self.assertTrue("name" in amenity_d)
+        self.assertTrue("name" in amenity_d.keys())
 
     def test_attribute_types(self):
         amenity = Amenity()
