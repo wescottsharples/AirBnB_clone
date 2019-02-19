@@ -32,16 +32,19 @@ class TestClasscity(unittest.TestCase):
             os.remove("file.json")
 
     def test_subclass(self):
+        """tests if subclass of BaseModel"""
         city = City()
         self.assertTrue(issubclass(city.__class__, BaseModel), True)
 
     def test_docstrings(self):
+        """tests if docstrings exist"""
         city = City()
         self.assertTrue(len(city.__doc__) > 0)
         for method in dir(city):
             self.assertTrue(len(method.__doc__) > 0)
 
     def test_attribute_types(self):
+        """test if attrs are correct type"""
         city = City()
         self.assertEqual(type(city.name), str)
         self.assertEqual(type(city.state_id), str)
