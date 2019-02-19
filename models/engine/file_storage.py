@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module is for the storage engine."""
 import json
+from models import storage
 
 
 class FileStorage:
@@ -40,6 +41,7 @@ class FileStorage:
             for key, value in dict_dict.items():
                 if '__class__' in value.keys():
                     class_name = value['__class__']
-                    eval("{}({})".format(class_name, **value))
+                    obj = eval("{}({})".format(class_name, **value))
+                    storage.new(obj)
         except FileNotFoundError:
             pass
