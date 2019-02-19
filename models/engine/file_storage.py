@@ -37,10 +37,10 @@ class FileStorage:
         try:
             with open(self.__file_path) as f:
                 dict_dict = json.load(f)
-            for key, value in dict_dict.items():
-                if '__class__' in value.keys():
-                    class_name = value['__class__']
-                    obj = eval("{}({})".format(class_name, **value))
-                    storage.save(obj)
+                for key, value in dict_dict.items():
+                    if '__class__' in value.keys():
+                        class_name = value['__class__']
+                        obj = eval("{}({})".format(class_name, **value))
+                        storage.save(obj)
         except FileNotFoundError:
             pass
