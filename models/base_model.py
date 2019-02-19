@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """This module contains the BaseModel class."""
 import datetime
+import models
 import uuid
-from models.__init__ import storage
 
 
 class BaseModel:
@@ -28,10 +28,12 @@ class BaseModel:
                         value,
                         '%Y-%m-%dT%H:%M:%S.%f'
                     )
+                elif "__class__" == key:
+                    pass
                 else:
                     setattr(self, key, value)
         else:
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """returns a string with a description of the object"""
@@ -45,7 +47,7 @@ class BaseModel:
         updates the public instance attribute updated_at with current datetime
         """
         self.updated_at = datetime.datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """

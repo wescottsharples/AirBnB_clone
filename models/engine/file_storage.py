@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 """This module is for the storage engine."""
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -24,7 +31,7 @@ class FileStorage:
         """serializes __objects to the JSON file"""
         dict_dict = {}
         with open(self.__file_path, 'w') as f:
-            for obj in self.__objects.values():
+            for obj in self.all().values():
                 k = "{}.{}".format(obj.__class__.__name__, obj.id)
                 dict_dict[k] = obj.to_dict()
             json.dump(dict_dict, f)
@@ -38,9 +45,8 @@ class FileStorage:
             with open(self.__file_path) as f:
                 dict_dict = json.load(f)
                 for key, value in dict_dict.items():
-                    if '__class__' in value.keys():
-                        class_name = value['__class__']
-                        obj = eval("{}({})".format(class_name, **value))
-                        storage.save(obj)
+                    k = key.split('.')
+                    class_name = k[0]
+                    self.new(eval("{}".format(class_name))(**value))
         except FileNotFoundError:
             pass
