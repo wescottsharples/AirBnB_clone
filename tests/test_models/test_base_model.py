@@ -65,5 +65,19 @@ class TestClassBaseModel(unittest.TestCase):
         self.assertTrue(type(create_t) is str)
         self.assertTrue(type(update_t) is str)
 
+    def test_recreate(self):
+        """tests creating an instance of BaseModel using **kwargs"""
+        new_obj = BaseModel()
+        obj_dict = new_obj.to_dict()
+        recreate_obj = BaseModel(**obj_dict)
+        r_obj_dict = recreate_obj.to_dict()
+        self.assertTrue(type(recreate_obj) is BaseModel)
+        self.assertTrue(type(recreate_obj.id) is str)
+        self.assertTrue(type(recreate_obj.created_at) is datetime.datetime)
+        self.assertTrue(type(recreate_obj.updated_at) is datetime.datetime)
+        self.assertEqual(type(new_obj), type(recreate_obj))
+        self.assertEqual(new_obj.id, recreate_obj.id)
+        self.assertEqual(len(obj_dict), len(r_obj_dict))
+
 if __name__ == '__main__':
     unittest.main()
