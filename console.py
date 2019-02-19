@@ -144,12 +144,18 @@ class HBNBCommand(cmd.Cmd):
     def default(self, arg):
         args = arg.split('.')
         carg = args[0]
-        args = args[1].split('(')
-        cmand = args[0]
-        if cmand == "all":
-            self.do_all(carg)
-        elif cmand == "count":
-            self.do_count(arg)
+        if len(args) < 2:
+            print("*** Unknown syntax", arg)
+            return
+        try:
+            args = args[1].split('(')
+            cmand = args[0]
+            if cmand == "all":
+                self.do_all(carg)
+            elif cmand == "count":
+                self.do_count(arg)
+        except IndexError:
+            print("*** Unknown syntax", arg)
 
 
 if __name__ == '__main__':
