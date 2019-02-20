@@ -153,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
             if cmand == "all":
                 self.do_all(carg)
             elif cmand == "count":
-                self.do_count(arg)
+                self.do_count(carg)
         except IndexError:
             print("*** Unknown syntax", arg)
 
