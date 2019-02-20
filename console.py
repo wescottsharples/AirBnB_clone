@@ -163,15 +163,26 @@ class HBNBCommand(cmd.Cmd):
                 carg = carg + ' ' + args[1]
                 self.do_destroy(carg)
             elif cmand == "update":
-                args = args[1].split(', ')
-                for i in range(len(args)):
-                    if i == 2:
-                        args[i] = args[i].strip('\)')
-                    else:
-                        args[i] = args[i].strip('\"\)')
-                    carg += ' ' + args[i]
-                print(carg)
-                self.do_update(carg)
+                dargs = args[1].split(', ', 1)
+                if dargs[1][0] == '{':
+                    dargs[1] = dargs[1].split(', ')
+                    for darg in dargs[1]:
+                        final = ""
+                        darg = darg.split(':')
+                        darg[0] = darg[0].strip('\'\"\{')
+                        darg[1] = darg[1].strip('\}\)')
+                        darg = darg[0] + darg[1]
+                        final = carg + ' ' + dargs[0] + ' ' + darg
+                        self.do_update(final)
+                else:
+                    args = args[1].split(', ')
+                    for i in range(len(args)):
+                        if i == 2:
+                            args[i] = args[i].strip('\)')
+                        else:
+                            args[i] = args[i].strip('\'\"\)')
+                        carg += ' ' + args[i]
+                    self.do_update(carg)
         except IndexError:
             print("*** Unknown syntax", arg)
 
