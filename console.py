@@ -158,6 +158,10 @@ class HBNBCommand(cmd.Cmd):
                 args[1] = args[1].strip('\"\)')
                 carg = carg + ' ' + args[1]
                 self.do_show(carg)
+            elif cmand == "destroy":
+                args[1] = args[1].strip('\"\)')
+                carg = carg + ' ' + args[1]
+                self.do_destroy(carg)
         except IndexError:
             print("*** Unknown syntax", arg)
 
