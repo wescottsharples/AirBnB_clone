@@ -154,6 +154,10 @@ class HBNBCommand(cmd.Cmd):
                 self.do_all(carg)
             elif cmand == "count":
                 self.do_count(carg)
+            elif cmand == "show":
+                args[1] = args[1].strip('\"\)')
+                carg = carg + ' ' + args[1]
+                self.do_show(carg)
         except IndexError:
             print("*** Unknown syntax", arg)
 
