@@ -65,6 +65,11 @@ $
 ```
 
 ### How To Use
+Starting the console:
+```
+$ ./console.py
+(hbnb) 
+```
 Creating a new user: `create <class name>`
 ```
 (hbnb) create User
@@ -96,6 +101,11 @@ Destroying an instance based on class name and id: `destroy <class name> <id>`
 (hbnb) destroy User 38a22b25-ae9c-4fa9-9f94-59b3eb51bfba
 (hbnb) all
 []
+```
+Quitting the console:
+```
+(hbnb) quit
+$ 
 ```
 
 ### Authors
