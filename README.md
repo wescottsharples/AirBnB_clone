@@ -64,6 +64,50 @@ EOF  help  quit
 $ 
 ```
 
+### How To Use
+Starting the console:
+```
+$ ./console.py
+(hbnb) 
+```
+Creating a new user: `create <class name>`
+```
+(hbnb) create User
+38a22b25-ae9c-4fa9-9f94-59b3eb51bfba
+```
+Displaying a string representation of an instance based on class name and id: `show <class name> <id>`
+```
+(hbnb) show User 38a22b25-ae9c-4fa9-9f94-59b3eb51bfba
+["User] (38a22b25-ae9c-4fa9-9f94-59b3eb51bfba) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '38a22b25-ae9c-4fa9-9f94-59b3eb51bfba', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}"]
+```
+Displaying all string representation of instances: `all`
+```
+(hbnb) all
+["User] (38a22b25-ae9c-4fa9-9f94-59b3eb51bfba) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '38a22b25-ae9c-4fa9-9f94-59b3eb51bfba', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}"]
+```
+Displaying all string representation of instances of a certain class: `all <class name>`
+```
+(hbnb) all User
+["User] (38a22b25-ae9c-4fa9-9f94-59b3eb51bfba) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '38a22b25-ae9c-4fa9-9f94-59b3eb51bfba', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}"]
+```
+Updating an instance based on class name and id by adding or updating attribute: `update <class name> <id> attribute "attribute value"`
+```
+(hbnb) update User 38a22b25-ae9c-4fa9-9f94-59b3eb51bfba first_name "Betty"
+(hbnb) show User 38a22b25-ae9c-4fa9-9f94-59b3eb51bfba
+["User] (38a22b25-ae9c-4fa9-9f94-59b3eb51bfba) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '38a22b25-ae9c-4fa9-9f94-59b3eb51bfba', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300), 'first_name': 'Betty'}"]
+```
+Destroying an instance based on class name and id: `destroy <class name> <id>`
+```
+(hbnb) destroy User 38a22b25-ae9c-4fa9-9f94-59b3eb51bfba
+(hbnb) all
+[]
+```
+Quitting the console:
+```
+(hbnb) quit
+$ 
+```
+
 ### Authors
 [Athena Deng](https://github.com/ad-egg)
 

@@ -2,6 +2,7 @@
 """Unittests for User"""
 import datetime
 import os
+from pep8 import StyleGuide
 import unittest
 from models.base_model import BaseModel
 from models.user import User
@@ -31,44 +32,27 @@ class TestClassUser(unittest.TestCase):
         elif os.path.isfile('./file.json') is True:
             os.remove("file.json")
 
+    def test_style(self):
+        """tests for correct pep8 style"""
+        style = StyleGuide(quiet=True).check_files(["models/user.py"])
+        self.assertEqual(style.total_errors, 0, "fix pep8")
+
+    def test_docstrings(self):
+        """tests if docstrings exist"""
+        user = User()
+        self.assertTrue(issubclass(user.__class__, BaseModel), True)
+        self.assertTrue(len(User.__doc__) > 0)
+        for method in dir(User):
+            self.assertTrue(len(method.__doc__) > 0)
+
     def test_new_instance(self):
-        """tests creating a new instance of User class"""
-        testu = User()
-        self.assertTrue(type(testu) is User)
-        self.assertTrue(isinstance(testu, BaseModel))
-        self.assertTrue(type(testu.id) is str)
-        self.assertTrue(type(testu.created_at) is datetime.datetime)
-        self.assertTrue(type(testu.updated_at) is datetime.datetime)
-
-    def test_save(self):
-        """tests the save method in User class"""
-        testu = User()
-        update_t = testu.updated_at.isoformat(sep='T')
-        testu.save()
-        saved_update_t = testu.updated_at.isoformat(sep='T')
-        self.assertTrue(update_t != saved_update_t)
-        self.assertTrue("file.json")
-
-    def test_str(self):
-        """tests __str__ method of User class"""
-        testu = User()
-        testu_str = testu.__str__()
-        testu_str = testu_str.split()
-        self.assertEqual(testu_str[0], "[{}]".format(testu.__class__.__name__))
-        self.assertEqual(testu_str[1], "({})".format(testu.id))
-
-    def test_to_dict(self):
-        """tests the to_dict method in User class"""
-        testu = User()
-        testu_dict = testu.to_dict()
-        self.assertTrue(type(testu_dict) is dict)
-        create_t = testu_dict['created_at']
-        update_t = testu_dict['updated_at']
-        self.assertTrue(type(create_t) is str)
-        self.assertTrue(type(update_t) is str)
-
-    def test_email(self):
-        """tests the user's email"""
+        """tests creating a new instance of BaseModel class"""
+        tests = User()
+        self.assertTrue(type(tests) is User)
+        self.assertTrue(isinstance(tests, BaseModel))
+        self.assertTrue(type(tests.id) is str)
+        self.assertTrue(type(tests.created_at) is datetime.datetime)
+        self.assertTrue(type(tests.updated_at) is datetime.datetime)
 
 if __name__ == '__main__':
     unittest.main()

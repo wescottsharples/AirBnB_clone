@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module is the hbnb console."""
 import cmd
+from shlex import split
 import sys
 
 from models.base_model import BaseModel
@@ -90,6 +91,17 @@ class HBNBCommand(cmd.Cmd):
                     obj_list.append(storage.all()[key].__str__())
             print(obj_list)
 
+    def do_count(self, arg):
+        """Shows count of all instances specified"""
+        if arg not in self.__classes:
+            print("** class doesn't exist **")
+        else:
+            count = 0
+            for key in storage.all().keys():
+                if arg in key:
+                    count += 1
+            print(count)
+
     def do_update(self, arg):
         """Update or add attr to specified instance"""
         args = self.parse(arg)
@@ -126,8 +138,54 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def parse(self, arg):
-        """Converts line to tuple of arguments"""
+        """Converts arg to tuple of arguments"""
         return tuple(arg.split())
+
+    def default(self, arg):
+        args = arg.split('.')
+        carg = args[0]
+        if len(args) < 2:
+            print("*** Unknown syntax", arg)
+            return
+        try:
+            args = args[1].split('(')
+            cmand = args[0]
+            if cmand == "all":
+                self.do_all(carg)
+            elif cmand == "count":
+                self.do_count(carg)
+            elif cmand == "show":
+                args[1] = args[1].strip('\"\)')
+                carg = carg + ' ' + args[1]
+                self.do_show(carg)
+            elif cmand == "destroy":
+                args[1] = args[1].strip('\"\)')
+                carg = carg + ' ' + args[1]
+                self.do_destroy(carg)
+            elif cmand == "update":
+                dargs = args[1].split(', ', 1)
+                if dargs[1][0] == '{':
+                    dargs[1] = dargs[1].split(', ')
+                    for darg in dargs[1]:
+                        final = ""
+                        darg = darg.split(':')
+                        darg[0] = darg[0].strip('\'\"\{')
+                        darg[1] = darg[1].strip('\}\)')
+                        darg = darg[0] + darg[1]
+                        final = carg + ' ' + dargs[0] + ' ' + darg
+                        self.do_update(final)
+                else:
+                    args = args[1].split(', ')
+                    for i in range(len(args)):
+                        if i == 2:
+                            args[i] = args[i].strip('\)')
+                        else:
+                            args[i] = args[i].strip('\'\"\)')
+                        carg += ' ' + args[i]
+                    self.do_update(carg)
+        except IndexError:
+            print("*** Unknown syntax", arg)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
