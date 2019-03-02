@@ -10,6 +10,6 @@ header {
 header div.logo {
     background: url("../images/logo.png") no-repeat;
     position: relative;
-    margin-left: 20px;
     height: 100%;
+    background-position: 20px 50%;
 }
