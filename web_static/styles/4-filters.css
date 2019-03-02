@@ -1,5 +1,4 @@
 div.container section.filters {
-	position: absolute;
 	height: 70px;
 	width: 100%;
 	border-style: solid;
@@ -11,8 +10,7 @@ div.container section.filters {
 section.filters button {
     background-color: #FF5A5F;
     float: right;
-	top: 11px;
-	right: 30px;
+    margin: 11px 30px;
     height: 48px;
     width: 20%;
     border: 0;
