@@ -34,7 +34,7 @@ div.container section.filters div.locations {
     border-right: 1px solid #DDDDDD;
 }
 
-div.container section.filters div.popover div {
+div.container section.filters ul.popover div {
     background-color: #FAFAFA;
     display: none;
     text-indent: 10%;
@@ -45,11 +45,11 @@ div.container section.filters div.popover div {
     border-radius 4px;
 }
 
-div.container section.filters div.popover div ul {
+div.container section.filters ul.popover div ul {
     list-style-type: none;
 }
 
-div.container section.filters div:hover div.popover {
+div.container section.filters div:hover ul.popover {
     background-color: #FAFAFA;
     display: block;
 }
@@ -68,33 +68,4 @@ section.filters button {
 
 section.filters button:hover {
     opacity: .9;
-}
-
-section.filters div.locations:hover div.amenities:hover {
-	background-color: #fafafa;
-}
-
-section.filters div.popover {
-	background-color: #fafafa;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	display: none;
-	position: absolute;
-	width: 100%;
-}
-
-section.filters div.locations:hover div.amenities:hover ul.popover {
-	display: block;
-}
-
-section.filters div.locations ul {
-	padding: 6px 0 6px 0;
-}
-
-section.filters div.locations li {
-	margin: 0 auto 6px 3em;
-}
-
-section.filters div.amenities li {
-	margin: 12px auto 12px 30px;
 }
