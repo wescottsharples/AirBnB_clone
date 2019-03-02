@@ -69,3 +69,32 @@ section.filters button {
 section.filters button:hover {
     opacity: .9;
 }
+
+section.filters div.locations:hover div.amenities:hover {
+	background-color: #fafafa;
+}
+
+section.filters div.popover {
+	background-color: #fafafa;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	display: none;
+	position: absolute;
+	width: 100%;
+}
+
+section.filters div.locations:hover div.amenities:hover ul.popover {
+	display: block;
+}
+
+section.filters div.locations ul {
+	padding: 6px 0 6px 0;
+}
+
+section.filters div.locations li {
+	margin: 0 auto 6px 3em;
+}
+
+section.filters div.amenities li {
+	margin: 12px auto 12px 30px;
+}
